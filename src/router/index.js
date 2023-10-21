@@ -14,6 +14,7 @@ const router = createRouter({
     {
       path: '/coaches/:id',
       component: () => import('../views/coaches/CoachDetail.vue'),
+      props: true,
       children: [
         {
           path: 'contact', //coaches/c1/contact - notice there is no forward slash in front of child route
