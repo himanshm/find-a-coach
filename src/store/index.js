@@ -12,7 +12,7 @@ const store = createStore({
     state() {
         return {
             // Should be used when a user sign ups as a coach and thereafter to verify whether we already got a coach.
-            userId: 'c3'
+            userId: 'c1'
         }
     },
     getters: {

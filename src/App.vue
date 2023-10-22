@@ -2,7 +2,15 @@
 <template>
   <the-header></the-header>
   <!-- Render all the views here -->
-  <router-view></router-view>
+  <!-- You are allowed to have multiple root level elements in your components' templates but if you plan on wrapping those components with transition then the wrapped components must only have one root element -->
+  <router-view v-slot="slotProps">
+    <!-- Add transition to routes -->
+    <!-- mode="out-in" first animates the removal of the existing page and then the appearance of a new page. -->
+    <transition name="route" mode="out-in">
+      <!-- Bind the dynamic component to the component the router decided to Load -->
+      <component :is="slotProps.Component"></component>
+    </transition>
+  </router-view>
 </template>
 
 <script>
@@ -28,5 +36,29 @@ html {
 
 body {
   margin: 0;
+}
+
+.route-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.route-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.route-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.route-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+.route-enter-to,
+.route-leave-from {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
