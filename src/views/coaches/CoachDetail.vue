@@ -1,27 +1,29 @@
 <template>
-  <section>
-    <base-card>
-      <h2>{{ fullName }}</h2>
-      <h3>${{ rate }}/hour</h3>
-    </base-card>
-  </section>
-  <section>
-    <base-card>
-      <header>
-        <h2>Interested! Reach out Now!</h2>
-        <!-- add a router-link to navigate to contact page through a dynamic id (hard-coded for now) -->
-        <base-button link :to="contactLink">Contact</base-button>
-      </header>
-      <!-- render the child route of this component which is contact route -->
-      <router-view></router-view>
-    </base-card>
-  </section>
-  <section>
-    <base-card>
-      <base-badge v-for="area in areas" :key="area" :type="area" :title="area"></base-badge>
-      <p>{{ description }}</p>
-    </base-card>
-  </section>
+  <div>
+    <section>
+      <base-card>
+        <h2>{{ fullName }}</h2>
+        <h3>${{ rate }}/hour</h3>
+      </base-card>
+    </section>
+    <section>
+      <base-card>
+        <header>
+          <h2>Interested! Reach out Now!</h2>
+          <!-- add a router-link to navigate to contact page through a dynamic id (hard-coded for now) -->
+          <base-button link :to="contactLink">Contact</base-button>
+        </header>
+        <!-- render the child route of this component which is contact route -->
+        <router-view></router-view>
+      </base-card>
+    </section>
+    <section>
+      <base-card>
+        <base-badge v-for="area in areas" :key="area" :type="area" :title="area"></base-badge>
+        <p>{{ description }}</p>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -43,7 +45,7 @@ export default {
     },
     contactLink() {
       console.log(`${this.$route.path}`)
-      return `this.$route.path/${this.id}/contact`
+      return `${this.$route.path}/contact` // There is a bug here.
     },
     areas() {
       return this.selectedCoach.areas
