@@ -3,12 +3,40 @@
     <nav>
       <h1><router-link to="/">Find a Coach</router-link></h1>
       <ul>
-        <li><router-link to="/coaches">All Coaches</router-link></li>
-        <li><router-link to="/requests">Requests</router-link></li>
+        <li>
+          <router-link to="/coaches">All Coaches</router-link>
+        </li>
+        <li v-if="isLoggedIn">
+          <router-link to="/requests">Requests</router-link>
+        </li>
+        <li v-else>
+          <router-link to="/auth">Login</router-link>
+        </li>
+        <!-- Add a "logout" action and flow -->
+        <li v-if="isLoggedIn">
+          <base-button @click="logout">Logout</base-button>
+        </li>
       </ul>
     </nav>
   </header>
 </template>
+
+<script>
+export default {
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+      // Use replace to navigate away, replace instead of push so that we can't go back
+      this.$router.replace('/coaches')
+    }
+  }
+}
+</script>
 
 <style scoped>
 header {
