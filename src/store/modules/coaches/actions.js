@@ -12,8 +12,10 @@ export default {
     // .json is added for firebase only nothing vue specific
     // And anything after the url creates an entry in firebase
     // await is used before a promise
+
+    const token = context.rootGetters.token
     const response = await fetch(
-      `https://find-a-coach-vue-app-default-rtdb.firebaseio.com/coaches/${userId}.json`,
+      `https://find-a-coach-vue-app-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=${token}`,
       {
         // method below is PUT as the id of the coach will already exist after adding authentication to the app and one would first
         // need to sign up and after can become a coach if one wants to

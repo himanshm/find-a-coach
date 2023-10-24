@@ -17,8 +17,11 @@
           <!-- Load the coaches from server/vuex store when this button is pressed -->
           <!-- Force Refresh when the refresh button is clicked -->
           <base-button mode="outline" @click="loadCoaches(true)">Refresh</base-button>
-          <!-- Second Button which is also a router-link allows us to register as a coach -->
-          <base-button v-if="!isCoach && !isLoading" link to="/register">
+          <!-- Upon clicking on the below button we want the users to be redirected to '/register' route => add a query parameter -->
+          <base-button link to="/auth?redirect=register" v-if="!isLoggedIn">
+            Login to Register as a Coach
+          </base-button>
+          <base-button v-if="showRegisterButton" link to="/register">
             Register as Coach
           </base-button>
         </div>
@@ -63,6 +66,12 @@ export default {
     }
   },
   computed: {
+    showRegisterButton() {
+      return this.isLoggedIn && !this.isCoach && !this.isLoading
+    },
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated
+    },
     isCoach() {
       return this.$store.getters['coaches/isCoach']
     },

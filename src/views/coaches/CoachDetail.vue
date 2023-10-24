@@ -44,7 +44,6 @@ export default {
       return `${this.selectedCoach.firstName} ${this.selectedCoach.lastName}`
     },
     contactLink() {
-      console.log(`${this.$route.path}`)
       return `${this.$route.path}/contact` // There is a bug here.
     },
     areas() {

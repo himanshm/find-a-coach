@@ -2,24 +2,14 @@ import { createStore } from 'vuex'
 
 import coachesModule from './modules/coaches/index';
 import requestsModule from './modules/requests/index';
+import authModule from './modules/auth/index'
 
 const store = createStore({
     modules: {
         coaches: coachesModule, // Key here will be used in namespacing
-        requests: requestsModule
+        requests: requestsModule,
+        auth: authModule
     },
-    // manage a root state to check for a user being a coach and hide the register as a coach button after registration
-    state() {
-        return {
-            // Should be used when a user sign ups as a coach and thereafter to verify whether we already got a coach.
-            userId: 'c1'
-        }
-    },
-    getters: {
-        userId(state) {
-            return state.userId
-        }
-    }
 })
 
 
